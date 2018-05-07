@@ -1,6 +1,6 @@
 
 //decorator
-import {Controller, Get, HttpCode, Req, Res} from "@nestjs/common";
+import {Controller, Get, HttpCode, Req, Res,Post} from "@nestjs/common";
 
 
 @Controller('Usuario')
@@ -10,6 +10,7 @@ export class  UsuarioController {
         apellido:'morale',
         edad:22
     };
+    usuarios = [];
     @HttpCode(202)
     @Get('mostrar')
     mostrarUsuario(){
@@ -17,6 +18,18 @@ export class  UsuarioController {
     }
     @Get('mostrarExpress')
     mostrarUsuarioExpress(@Req() request, @Res() response) {
-        return response.status(500).send(this.usuario);
+        return response.status(204).send(this.usuario);
+    }
+
+    @Post('crearUsuario')
+    crearUsuario(@Req() request, @Res() response) {
+        const nuevoUsuario = {
+            //query parameters
+            nombre: request.query.nombre,
+            apellido: request.query.apellido,
+            edad: request.query.edad
+        };
+        this.usuarios.push(nuevoUsuario);
+        return response.status(201).send(nuevoUsuario);
     }
 }
