@@ -1,5 +1,6 @@
 import {Controller, Get, HttpCode, Post, Req, Res} from "@nestjs/common";
 import Status = jest.Status;
+import {UsuarioService} from "./usuario.service";
 
 // decorator
 @Controller('Usuario')
@@ -12,10 +13,14 @@ export class UsuarioController {
 
     usuarios = [];
 
+    constructor(private _usuarioService:UsuarioService){
+
+    }
     @HttpCode(202)
     @Get('mostrar')
-    mostrarUsuario() {
-        return this.usuario;
+    mostrarUsuario(@Res() response) {
+       const usuarios = this._usuarioService.mostrarUsuarios();
+       return response.send(usuarios);
     }
 
     @Get('mostrarExpress')
@@ -36,7 +41,7 @@ export class UsuarioController {
             edad: request.query.edad
         };
 
-        this.usuarios.push(nuevoUsuario);
+        const usuarioCreado = this._usuarioService.crearUsuario(nuevoUsuario);
 
         return response.status(201).send(nuevoUsuario);
     }
