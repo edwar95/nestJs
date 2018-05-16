@@ -27,7 +27,7 @@ export class ParametrosController{
             protocol:request.protocol,
             headers:request.header
         };
-        return response.sen(respuesta);
+        return response.send(respuesta);
 
     };
 }
