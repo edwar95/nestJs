@@ -46,4 +46,25 @@ export class ParametrosController {
 
         return response.status(201).send(nuevoUsuario);
     }
+
+    @Get('establecerCookie')
+    establecerCookie(@Req() request, @Res() response){
+        const parametros={
+            nombreCookie:request.params.nombre,
+            valorCookie:request.params.valor,
+        };
+        response.cookie(parametros.nombreCookie,parametros.valorCookie);
+        return response.send(parametros);
+    }
+    @Get('cookie/:nombre')
+    leerCookie(@Req() request, @Res() response){
+        const nombreCookie= request.params.nombre;
+        const existeCookie= request.cookies[nombreCookie];
+        if(existeCookie){
+            return response.send({valor:existeCookie})
+        }else {
+            return response.status(404).send({mensaje: 'no encontramos cookie'})
+        }
+
+    }
 }

@@ -9,13 +9,13 @@ export class UsuarioController {
         nombre: 'Adrian',
         apellido: 'Eguez',
         edad: 28
-    };
+    }; constructor(private _usuarioService:UsuarioService){
+
+    }
 
     usuarios = [];
 
-    constructor(private _usuarioService:UsuarioService){
 
-    }
     @HttpCode(202)
     @Get('mostrar')
     mostrarUsuario(@Res() response) {
