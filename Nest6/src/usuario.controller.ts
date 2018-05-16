@@ -29,10 +29,7 @@ export class UsuarioController {
     }
 
     @Post('crearUsuario')
-    crearUsuario(
-        @Req() request,
-        @Res() response
-    ) {
+    crearUsuario(@Req() request, @Res() response) {
         const nuevoUsuario = {
             nombre: request.query.nombre,
             apellido: request.query.apellido,
@@ -41,9 +38,7 @@ export class UsuarioController {
 
         this.usuarios.push(nuevoUsuario);
 
-        return response
-            .status(201)
-            .send(nuevoUsuario);
+        return response.status(201).send(nuevoUsuario);
     }
 
 

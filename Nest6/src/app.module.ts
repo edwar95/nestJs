@@ -7,10 +7,7 @@ import {ParametrosController} from "./parametros.controller";
 
 @Module({
     imports: [],
-    controllers: [
-        AppController,
-        UsuarioController,
-        ParametrosController],
+    controllers: [AppController,UsuarioController, ParametrosController],
     providers: [AppService, UsuarioService],
 })
 export class AppModule {

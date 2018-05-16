@@ -4,13 +4,7 @@ import {Body, Controller, Get, Headers, Param, Post, Query, Req, Res} from "@nes
 export class ParametrosController {
 
     @Post('devolver/:id/:modelo')
-    devolverParametros(
-        @Req() request,
-        @Res() response,
-        @Query() queryParams,
-        @Body() bodyParams,
-        @Param() paramsParams
-    ) {
+    devolverParametros(@Req() request, @Res() response, @Query() queryParams,@Body() bodyParams, @Param() paramsParams) {
         const respuesta = {
             queryParams: queryParams,
             bodyParams: bodyParams,
@@ -20,11 +14,7 @@ export class ParametrosController {
     }
 
     @Get('ReqRes')
-    requestResponse(
-        @Req() request,
-        @Res() response,
-        @Headers() headers
-    ) {
+    requestResponse(@Req() request, @Res() response, @Headers() headers) {
         const respuesta = {
             baseUrl: request.baseUrl,
             hostname: request.hostname,
