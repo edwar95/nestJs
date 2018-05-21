@@ -5,9 +5,20 @@ import {UsuarioController} from "./usuario.controller";
 import {UsuarioService} from "./usuario.service";
 import {ParametrosController} from "./parametros.controller";
 import {LogMiddleware} from './log.middleware';
-
+import { TypeOrmModule } from '@nestjs/typeorm';
 @Module({
-    imports: [],
+    imports: [TypeOrmModule.forRoot({
+        type: 'mysql',
+        host: 'web2018agr2.mysql.database.azure.com',
+        port: 3306,
+        username: 'profesor@web2018agr2',
+        password: 'Javascript1',
+        database: 'web',
+        entities: [__dirname + '/../**/*.entity{.ts,.js}'],
+        synchronize: true,
+        ssl:true,
+    }),
+    ],
     controllers: [
         AppController,
         UsuarioController,
