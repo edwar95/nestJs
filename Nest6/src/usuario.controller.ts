@@ -1,4 +1,4 @@
-import {Body, Controller, Get, HttpCode, Post, Req, Res, UseGuards} from "@nestjs/common";
+import {Body, Controller, Get, HttpCode, Post, ReflectMetadata, Req, Res, UseGuards} from "@nestjs/common";
 import Status = jest.Status;
 import {UsuarioService} from "./usuario.service";
 import {UsuarioPipe} from "./pipes/usuario.pipe";
@@ -22,6 +22,7 @@ export class UsuarioController {
 
     @HttpCode(202)
     @Get('mostrar')
+    @ReflectMetadata('permisos',['publico'])
     mostrarUsuario(@Res() response) {
        const usuarios = this._usuarioService.mostrarUsuarios();
        return response.send(usuarios);
@@ -38,6 +39,7 @@ export class UsuarioController {
     }
 
     @Post('crearUsuario')
+    @ReflectMetadata('permisos',['privado'])
     crearUsuario(@Body(new UsuarioPipe(USUARIO_SCHEMA)) nuevoUsuario) {
 
         const usuarioCreado = this._usuarioService.crearUsuario(nuevoUsuario);
