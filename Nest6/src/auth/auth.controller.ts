@@ -18,8 +18,12 @@ export class AuthController{
                     username: username
                 };
 
-                return this._jwtService.emitirToken(payload);
-                
+                const respuestaToken= {
+                    jwt: this._jwtService.emitirToken(payload)
+                };
+
+                return respuestaToken;
+
             }else{
                 throw new BadRequestException({mensaje:'Credenciales Erroneas'})
             }
