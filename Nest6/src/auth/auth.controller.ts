@@ -1,5 +1,6 @@
 import {BadRequestException, Body, Controller, Post} from "@nestjs/common";
 import {JwtService} from "../Servicios/jwt.service";
+import {error} from "util";
 
 @Controller('Auth')
 export class AuthController{
@@ -30,6 +31,30 @@ export class AuthController{
         }else{
             throw new BadRequestException({mensaje:'No envia parametros'});
 
+        }
+    }
+
+    @Post('verificarJWT')
+    verificarJWT(@Body('jwt') jwt: string,){
+        const tieneparametros= jwt;
+        if(tieneparametros){
+            this._jwtService.verficarToken(jwt,(error,data)=>{
+            if(error){
+                throw new BadRequestException(
+                    {
+                        mensaje: 'Jwt invalid',
+                        error: error
+                    }
+                )
+            }else {
+                return {
+                    mensaje: 'ok',
+                    data: data
+                }
+            }
+            })
+        }else {
+            throw new BadRequestException({mensaje: 'No envia jwt'});
         }
     }
 
