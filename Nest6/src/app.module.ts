@@ -8,6 +8,7 @@ import {LogMiddleware} from './log.middleware';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import {UsuarioEntity} from "./usuario/usuario.entity";
 import {FotoEntity} from "./foto/foto.entity";
+import {JwtService} from "./Servicios/jwt.service";
 @Module({
     imports: [TypeOrmModule.forRoot({
         type: 'mysql',
@@ -29,7 +30,8 @@ import {FotoEntity} from "./foto/foto.entity";
         ParametrosController],
     providers: [
         AppService,
-        UsuarioService
+        UsuarioService,
+        JwtService
     ],
 })
 export class AppModule implements NestModule {
