@@ -10,6 +10,7 @@ import {UsuarioEntity} from "./usuario/usuario.entity";
 import {FotoEntity} from "./foto/foto.entity";
 import {JwtService} from "./Servicios/jwt.service";
 import {AuthController} from "./auth/auth.controller";
+import {JwtGuard} from "./Guard/jwt-guard";
 @Module({
     imports: [TypeOrmModule.forRoot({
         type: 'mysql',
@@ -34,7 +35,8 @@ import {AuthController} from "./auth/auth.controller";
     providers: [
         AppService,
         UsuarioService,
-        JwtService
+        JwtService,
+        JwtGuard
     ],
 })
 export class AppModule implements NestModule {
